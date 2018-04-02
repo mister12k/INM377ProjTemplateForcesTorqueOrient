@@ -1,0 +1,9 @@
+﻿  Boid.cpp
+  INM377ProjTemplateForcesTorqueOrient.cpp
+  main.cpp
+  Note: including lib: glut32.lib
+  
+  Note: including lib: glut32.lib
+  
+Boid.obj : error LNK2001: unresolved external symbol "public: static float const Boid::radius" (?radius@Boid@@2MB)
+.\INM377ProjTemplateForcesTorqueOrient_debug.exe : fatal error LNK1120: 1 unresolved externals
