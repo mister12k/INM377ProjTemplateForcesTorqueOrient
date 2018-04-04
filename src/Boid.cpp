@@ -48,7 +48,7 @@
 	// Force that allows the boid to avoid obstacles by steering
 	btVector3 Boid::avoidanceForce(const std::vector<Obstacle *>& obstacles) const{
 		btScalar distObstacle = 0, minObstacle = (btScalar) std::numeric_limits<int>::max();
-		btVector3 avoidPoint, targetPoint, avoidingForce;
+		btVector3 avoidPoint, avoidingForce, target, otherForces;
 		Obstacle * nearestObstacle = nullptr;
 
 		for (auto const &obstacle : obstacles) {
@@ -56,20 +56,24 @@
 				if (distObstacle < minObstacle) {
 					minObstacle = distObstacle;
 					nearestObstacle = obstacle;
-					targetPoint = avoidPoint;
 				}
+			}
+			else if (obstacle->missed(this->body->getCenterOfMassPosition(), target)) {
+				otherForces += target;
 			}
 		}
 		if (nearestObstacle != nullptr) {
-			avoidingForce = avoidPoint.cross(this->body->getCenterOfMassPosition());
-			return avoidingForce.normalized();
+			// Will return a vector normalized to the right plus (0,1,0) to avoid the obstactle. The upwards vector is to try and avoid it by overcoming it instead of going around.
+			return (avoidPoint - this->body->getCenterOfMassPosition()).cross(btVector3(0, 1, 0)).normalized() + btVector3(0, 1, 0);
 		}else	{
-			return btVector3(0, 0, 0);
+			return otherForces;
 		}
 
 	}
 
-	Boid::Boid(btRigidBody* b){}
+	Boid::Boid(btRigidBody* b){
+		this->body = b;
+	}
 
 	// Apply steering forces (called on each iteration of the physics
 	// engine) including physical forces of flight, flocking behaviour

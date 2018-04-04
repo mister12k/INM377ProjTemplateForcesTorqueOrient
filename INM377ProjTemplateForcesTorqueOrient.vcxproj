@@ -22,6 +22,8 @@
     <ClCompile Include="src\Boid.cpp" />
     <ClCompile Include="src\INM377ProjTemplateForcesTorqueOrient.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\MiscObstacles.cpp" />
+    <ClCompile Include="src\MyFlockingDemo.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Boid.h" />

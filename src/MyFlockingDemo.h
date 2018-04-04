@@ -5,7 +5,6 @@
 #include "GlutDemoApplication.h"
 #include <vector>
 
-#include "MyCollisionDemo.h"
 #include "Obstacle.h"
 #include "Boid.h"
 
@@ -31,7 +30,7 @@ public:
 	void steer() const;
 };
 
-class MyFlockingDemo : public MyCollisionDemo
+class MyFlockingDemo 
 {
 	Flock flock;
 
