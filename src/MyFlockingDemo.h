@@ -3,9 +3,11 @@
 
 #include "btBulletDynamicsCommon.h"
 #include "GlutDemoApplication.h"
+#define PlatformDemoApplication GlutDemoApplication
 #include <vector>
 
 #include "Obstacle.h"
+#include "MiscObstacles.h"
 #include "Boid.h"
 
 class Flock {
@@ -13,11 +15,11 @@ class Flock {
 	std::vector<Obstacle *> obstacles;
 
 	// declare dummies as private to forbid copying
-	Flock(const Flock &flock) {}
-	Flock & operator=(const Flock &flock) { return *this; }
+	Flock(const Flock &flock);
+	Flock & operator=(const Flock &flock);
 
 public:
-	Flock() {}
+	Flock();
 
 	// Add a boid with the given body.
 	// (deletion of the body is handled by the Demo class)
@@ -30,17 +32,64 @@ public:
 	void steer() const;
 };
 
-class MyFlockingDemo 
+class MyFlockingDemo : public PlatformDemoApplication
 {
-	Flock flock;
+
+	class btBroadphaseInterface*	m_overlappingPairCache;
+
+	class btCollisionDispatcher*	m_dispatcher;
+
+	class btConstraintSolver*	m_constraintSolver;
+
+	class btDefaultCollisionConfiguration* m_collisionConfiguration;
+
+	enum
+	{
+		USE_CCD = 1,
+		USE_NO_CCD
+	};
+	int 	m_ccdMode;
 
 	void addSphereObstacle(btSphereShape *shape, const btVector3 &pos);
 	void addColumnObstacle(btCylinderShape *shape, const btVector3 &pos);
 
-public:
-	virtual ~MyFlockingDemo();
+	//keep the collision shapes, for deletion/cleanup
+	btAlignedObjectArray<btCollisionShape*>	m_collisionShapes;
 
-	void	initPhysics();
+public:
+	Flock flock;
+
+	MyFlockingDemo();
+
+	virtual ~MyFlockingDemo()
+	{
+		exitPhysics();
+	}
+
+	void initPhysics();
+
+	void exitPhysics();
+
+	virtual void keyboardCallback(unsigned char key, int x, int y);
+
+	virtual void	clientResetScene();
+
+	void displayText();
+
+	virtual void displayCallback();
+
+	virtual void clientMoveAndDisplay();
+
+	static DemoApplication* Create()
+	{
+		MyFlockingDemo* demo = new MyFlockingDemo;
+		demo->myinit();
+		demo->initPhysics();
+		return demo;
+	}
+
+	
+
 };
 
 #endif //MY_FLOCKING_DEMO_H

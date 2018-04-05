@@ -12,6 +12,12 @@ class Boid {
 	// Body of the boid (deletion managed by the Demo class)
 	btRigidBody* body;
 
+	// radius of a bounding sphere of the shape
+	btScalar radius;
+
+	// mass of each boid
+	btScalar mass;
+
 	// Unit vector for the direction in which the boid is heading
 	btVector3 heading() const;
 
@@ -25,12 +31,6 @@ class Boid {
 
 public:
 	static btCollisionShape *shape;
-
-	// radius of a bounding sphere of the shape
-	static const btScalar radius;
-
-	// mass of each boid
-	static const btScalar mass;
 
 	Boid(btRigidBody* b);
 

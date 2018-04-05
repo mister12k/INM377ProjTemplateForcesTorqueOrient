@@ -1,9 +1,26 @@
-﻿  Boid.cpp
-  INM377ProjTemplateForcesTorqueOrient.cpp
-  main.cpp
+﻿  main.cpp
+  MiscObstacles.cpp
+  MyFlockingDemo.cpp
+a:\github\inm377projtemplateforcestorqueorient\src\miscobstacles.cpp(29): error C3867: 'btVector3::x': non-standard syntax; use '&' to create a pointer to member
+a:\github\inm377projtemplateforcestorqueorient\src\miscobstacles.cpp(29): error C2446: '<=': no conversion from 'int' to 'const btScalar &(__thiscall btVector3::* )(void) const'
+  a:\github\inm377projtemplateforcestorqueorient\src\miscobstacles.cpp(29): note: There are no conversions from integral values to pointer-to-member values
+a:\github\inm377projtemplateforcestorqueorient\src\miscobstacles.cpp(29): error C3867: 'btVector3::z': non-standard syntax; use '&' to create a pointer to member
+a:\github\inm377projtemplateforcestorqueorient\src\miscobstacles.cpp(29): error C2296: '>=': illegal, left operand has type 'const btScalar &(__thiscall btVector3::* )(void) const'
+a:\github\inm377projtemplateforcestorqueorient\src\miscobstacles.cpp(29): error C2297: '>=': illegal, right operand has type 'const btScalar &(__thiscall btVector3::* )(void) const'
+a:\github\inm377projtemplateforcestorqueorient\src\miscobstacles.cpp(31): error C3867: 'btVector3::x': non-standard syntax; use '&' to create a pointer to member
+a:\github\inm377projtemplateforcestorqueorient\src\miscobstacles.cpp(31): error C2296: '+': illegal, left operand has type 'const btScalar &(__thiscall btVector3::* )(void) const'
+a:\github\inm377projtemplateforcestorqueorient\src\miscobstacles.cpp(31): error C2297: '+': illegal, right operand has type 'const btScalar &(__thiscall btVector3::* )(void) const'
+a:\github\inm377projtemplateforcestorqueorient\src\miscobstacles.cpp(31): error C3867: 'btVector3::y': non-standard syntax; use '&' to create a pointer to member
+a:\github\inm377projtemplateforcestorqueorient\src\miscobstacles.cpp(64): error C3867: 'btVector3::x': non-standard syntax; use '&' to create a pointer to member
+a:\github\inm377projtemplateforcestorqueorient\src\miscobstacles.cpp(64): error C3867: 'btVector3::z': non-standard syntax; use '&' to create a pointer to member
+a:\github\inm377projtemplateforcestorqueorient\src\miscobstacles.cpp(64): error C2297: '+=': illegal, right operand has type 'const btScalar &(__thiscall btVector3::* )(void) const'
+a:\github\inm377projtemplateforcestorqueorient\src\miscobstacles.cpp(67): error C3867: 'btVector3::x': non-standard syntax; use '&' to create a pointer to member
+a:\github\inm377projtemplateforcestorqueorient\src\miscobstacles.cpp(67): error C2296: '+': illegal, left operand has type 'const btScalar &(__thiscall btVector3::* )(void) const'
+a:\github\inm377projtemplateforcestorqueorient\src\miscobstacles.cpp(67): error C2297: '+': illegal, right operand has type 'const btScalar &(__thiscall btVector3::* )(void) const'
+a:\github\inm377projtemplateforcestorqueorient\src\miscobstacles.cpp(67): error C3867: 'btVector3::y': non-standard syntax; use '&' to create a pointer to member
   Note: including lib: glut32.lib
   
   Note: including lib: glut32.lib
   
-Boid.obj : error LNK2001: unresolved external symbol "public: static float const Boid::radius" (?radius@Boid@@2MB)
-.\INM377ProjTemplateForcesTorqueOrient_debug.exe : fatal error LNK1120: 1 unresolved externals
+a:\github\inm377projtemplateforcestorqueorient\src\myflockingdemo.cpp(59): warning C4316: 'SphereObstacle': object allocated on the heap may not be aligned 16
+a:\github\inm377projtemplateforcestorqueorient\src\myflockingdemo.cpp(75): warning C4316: 'ColumnObstacle': object allocated on the heap may not be aligned 16

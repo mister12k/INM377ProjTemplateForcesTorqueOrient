@@ -13,7 +13,8 @@ subject to the following restrictions:
 3. This notice may not be removed or altered from any source distribution.
 */
 
-#include "INM377ProjTemplateForcesTorqueOrient.h"
+//#include "INM377ProjTemplateForcesTorqueOrient.h"
+#include "MyFlockingDemo.h"
 #include "GlutStuff.h"
 #include "GLDebugDrawer.h"
 #include "btBulletDynamicsCommon.h"
@@ -27,7 +28,7 @@ GLDebugDrawer	gDebugDrawer;
 int main(int argc,char** argv)
 {
 
-	INM377ProjTemplateTorqueOrient* demo = new INM377ProjTemplateTorqueOrient();
+	MyFlockingDemo* demo = new MyFlockingDemo();
 
 #ifdef __DEBUG_FPU_ISSUES
 //	feenableexcept (FE_DIVBYZERO);
