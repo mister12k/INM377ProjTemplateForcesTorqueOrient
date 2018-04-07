@@ -4,7 +4,7 @@
 #include "btBulletDynamicsCommon.h"
 
 #include "Obstacle.h"
-
+#include "MiscObstacles.h"
 #include <vector>
 
 // A boid is a single agent in the flock
@@ -18,6 +18,8 @@ class Boid {
 	// mass of each boid
 	btScalar mass;
 
+	btCollisionShape *shape;
+
 	// Unit vector for the direction in which the boid is heading
 	btVector3 heading() const;
 
@@ -30,7 +32,6 @@ class Boid {
 	btVector3 avoidanceForce(const std::vector<Obstacle *>& obstacles) const;
 
 public:
-	static btCollisionShape *shape;
 
 	Boid(btRigidBody* b);
 

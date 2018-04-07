@@ -20,16 +20,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Boid.cpp" />
-    <ClCompile Include="src\INM377ProjTemplateForcesTorqueOrient.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\MiscObstacles.cpp" />
     <ClCompile Include="src\MyFlockingDemo.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Boid.h" />
-    <ClInclude Include="src\INM377ProjTemplateForcesTorqueOrient.h">
-      <DeploymentContent>false</DeploymentContent>
-    </ClInclude>
     <ClInclude Include="src\MiscObstacles.h" />
     <ClInclude Include="src\MyFlockingDemo.h" />
     <ClInclude Include="src\Obstacle.h" />

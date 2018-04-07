@@ -14,7 +14,6 @@ class Flock {
 	std::vector<Boid> boids;
 	std::vector<Obstacle *> obstacles;
 
-	// declare dummies as private to forbid copying
 	Flock(const Flock &flock);
 	Flock & operator=(const Flock &flock);
 

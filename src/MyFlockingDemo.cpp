@@ -79,7 +79,7 @@ MyFlockingDemo::MyFlockingDemo()
 	:m_ccdMode(USE_CCD)
 {
 	setDebugMode(btIDebugDraw::DBG_DrawText + btIDebugDraw::DBG_NoHelpText);
-	setCameraDistance(btScalar(40.));
+	setCameraDistance(btScalar(80.));
 }
 
 void MyTickCallback(btDynamicsWorld *world, btScalar timeStep) {
@@ -91,7 +91,7 @@ void MyFlockingDemo::initPhysics() {
 	setTexturing(true);
 	setShadows(false);
 
-	setCameraDistance(50.f);
+	setCameraDistance(100.f);
 
 	// init world
 	m_collisionConfiguration = new btDefaultCollisionConfiguration();
@@ -160,30 +160,35 @@ void MyFlockingDemo::initPhysics() {
 		b->setFriction(0.5);
 		b->activate(true);
 		flock.addBoid(b);
+	}
 
-		/*
+	// Creation of the obstacles
+	{
+		btCylinderShape* cylinder = new btCylinderShape(btVector3(2,110,2));
+		btCollisionShape* column = cylinder;
+		m_collisionShapes.push_back(column);
 
-		btConvexHullShape * bShape = new btConvexHullShape();
-		bShape->addPoint(btVector3(10, 0, 0));
-		bShape->addPoint(btVector3(0, 5, 0));
-		bShape->addPoint(btVector3(0, 0, 5));
-		bShape->addPoint(btVector3(0, 0, -5));
+		btTransform columnTransform;
+		columnTransform.setIdentity();
+		columnTransform.setOrigin(btVector3(0, 0, -50));
 
-		m_collisionShapes.push_back(bShape);
-		btTransform btrans;
-		btrans.setIdentity();
-		//		btCollisionShape* bshape = m_collisionShapes[3];
-		btVector3 bpos(20, 0, 0);
-		btrans.setOrigin(bpos);
-		btScalar bmass(1.0f);
-		btVector3 bLocalInertia;
-		bShape->calculateLocalInertia(bmass, bLocalInertia);
-		boid = localCreateRigidBody(bmass, btrans, bShape);
-		boid->setAnisotropicFriction(bShape->getAnisotropicRollingFrictionDirection(), btCollisionObject::CF_ANISOTROPIC_ROLLING_FRICTION);
-		boid->setFriction(0.5);
-		//		boid->setLinearVelocity(btVector3(1, 0, 0));
-		boid->activate(true);
-		*/
+		
+		btScalar massColumn(0.);
+
+		bool isDynamic = (massColumn != 0.f);
+
+		btVector3 localInertiaColumn(0, 0, 0);
+		if (isDynamic)
+			column->calculateLocalInertia(massColumn, localInertiaColumn);
+
+		btDefaultMotionState* myMotionStateColumn = new btDefaultMotionState(columnTransform);
+		btRigidBody::btRigidBodyConstructionInfo rbColInfo(massColumn, myMotionStateColumn, column, localInertiaColumn);
+		btRigidBody* col = new btRigidBody(rbColInfo);
+		col->setFriction(0.5);
+
+		m_dynamicsWorld->addRigidBody(col);
+		Obstacle* o = new ColumnObstacle(col->getCenterOfMassPosition(), 5);
+		flock.addObstacle(o);
 	}
 }
 

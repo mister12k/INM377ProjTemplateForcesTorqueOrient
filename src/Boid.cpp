@@ -46,11 +46,13 @@ btVector3 Boid::flockingForce(const std::vector<Boid>& boids) const{
 	bool leader = true;
 
 	for (auto const &boid : boids) {
-		if (this->canSee(boid.body->getCenterOfMassPosition())) {
-			leader = false;
+		if (this->body->getCenterOfMassPosition() != boid.body->getCenterOfMassPosition()) {
+			if (this->canSee(boid.body->getCenterOfMassPosition())) {
+				leader = false;
+			}
+			avgHeading += boid.heading();
+			avgPosNeigh += boid.body->getCenterOfMassPosition();
 		}
-		avgHeading += boid.heading();
-		avgPosNeigh += boid.body->getCenterOfMassPosition();
 	}
 
 	avgHeading = avgHeading / (btScalar) boids.size();
@@ -63,7 +65,7 @@ btVector3 Boid::flockingForce(const std::vector<Boid>& boids) const{
 // Force that allows the boid to avoid obstacles by steering
 btVector3 Boid::avoidanceForce(const std::vector<Obstacle *>& obstacles) const{
 	btScalar distObstacle = 0, minObstacle = (btScalar) std::numeric_limits<int>::max();
-	btVector3 avoidPoint, avoidingForce, target, otherForces;
+	btVector3 avoidPoint, avoidingForce, target, otherForces(0,0,0);
 	Obstacle * nearestObstacle = nullptr;
 
 	for (auto const &obstacle : obstacles) {
